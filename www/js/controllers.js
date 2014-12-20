@@ -27,7 +27,7 @@ angular.module('ionic-http-auth.controllers', [])
   $scope.login = function() {
     AuthenticationService.login($scope.user);
   };
- 
+
   $scope.$on('event:auth-loginRequired', function(e, rejection) {
     $scope.loginModal.show();
   });
@@ -47,14 +47,12 @@ angular.module('ionic-http-auth.controllers', [])
   });
  
   $scope.$on('event:auth-logout-complete', function() {
-    $state.go('app.home', {}, {reload: true, inherit: false});
+    console.log("logout complete");
   });    	
 })
  
-.controller('HomeCtrl', function($ionicViewService) {
- 	// This a temporary solution to solve an issue where the back button is displayed when it should not be.
- 	// This is fixed in the nightly ionic build so the next release should fix the issue
- 	$ionicViewService.clearHistory();
+.controller('HomeCtrl', function() {
+
 })
 
 .controller('CustomerCtrl', function($scope, $state, $http) {

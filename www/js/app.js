@@ -73,8 +73,9 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
       url: "/logout",
       views: {
     	   'menuContent' :{
-    		   controller: "LogoutCtrl"
-    	    }
+    		   controller: "LogoutCtrl",
+           templateUrl: "templates/home.html"
+         }
       } 
     });
   $urlRouterProvider.otherwise("/app/home");
