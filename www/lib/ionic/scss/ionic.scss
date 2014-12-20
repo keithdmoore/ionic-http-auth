@@ -15,16 +15,18 @@
 
   // Components
   "action-sheet",
+  "backdrop",
   "bar",
   "tabs",
   "menu",
   "modal",
+  "popover",
   "popup",
+  "loading",
   "items",
   "list",
   "badge",
   "slide-box",
-  "split-pane",
 
   // Forms
   "form",
@@ -32,6 +34,7 @@
   "toggle",
   "radio",
   "range",
+  "select",
   "progress",
 
   // Buttons
@@ -39,7 +42,10 @@
   "button-bar",
 
   // Util
-  "animations",
   "grid",
   "util",
-  "platform";
+  "platform",
+
+  // Animations
+  "animations",
+  "transitions";

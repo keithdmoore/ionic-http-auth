@@ -2,57 +2,58 @@
 /**
  * Platform
  * --------------------------------------------------
- * Platform specific tweaks when in Cordova.
+ * Platform specific tweaks
  */
 
-.platform-ios7.platform-cordova:not(.fullscreen) {
-  // iOS7 has a status bar which sits on top of the header.
+.platform-ios.platform-cordova {
+  // iOS7/8 has a status bar which sits on top of the header.
   // Bump down everything to make room for it. However, if
   // if its in Cordova, and set to fullscreen, then disregard the bump.
+  &:not(.fullscreen) {
+    .bar-header:not(.bar-subheader) {
+      height: $bar-height + $ios-statusbar-height;
 
-  .bar-header {
-    height: 64px;
+      &.item-input-inset .item-input-wrapper {
+        margin-top: 19px !important;
+      }
 
-    &.item-input-inset .item-input-wrapper {
-      margin-top: 19px !important;
+      > * {
+        margin-top: $ios-statusbar-height;
+      }
+    }
+    .tabs-top > .tabs,
+    .tabs.tabs-top {
+      top: $bar-height + $ios-statusbar-height;
     }
 
-    > * {
-      margin-top: 20px;
+    .has-header,
+    .bar-subheader {
+      top: $bar-height + $ios-statusbar-height;
+    }
+    .has-subheader {
+      top: $bar-height + $bar-subheader-height + $ios-statusbar-height;
+    }
+    .has-tabs-top {
+      top: $bar-height + $tabs-height + $ios-statusbar-height;
+    }
+    .has-header.has-subheader.has-tabs-top {
+      top: $bar-height + $bar-subheader-height + $tabs-height + $ios-statusbar-height;
     }
   }
-
-  .has-header, 
-  .bar-subheader {
-    top: 64px;
-  }
-
-  .has-subheader {
-    top: 108px;
+  &.status-bar-hide {
+    // Cordova doesn't adjust the body height correctly, this makes up for it
+    margin-bottom: 20px;
   }
 }
 
-.platform-ios7.status-bar-hide {
-  // Cordova doesn't adjust the body height correctly, this makes up for it
-  margin-bottom: 20px;
+@media (orientation:landscape) {
+  .platform-ios.platform-browser.platform-ipad {
+    position: fixed; // required for iPad 7 Safari
+  }
 }
 
-.platform-android.platform-cordova {
-  
-  .bar-header {
-    height: 48px;
-  }
-
-  .has-header,
-  .bar-subheader {
-    top: 48px;
-  }
-
-  .has-subheader {
-    top: 96px;
-  }
-
-  .title {
-    line-height: 48px;
-  }
+.platform-c:not(.enable-transitions) * {
+  // disable transitions on grade-c devices (Android 2)
+  -webkit-transition: none !important;
+  transition: none !important;
 }
