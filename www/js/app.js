@@ -53,7 +53,7 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
     })
     .state('app.home', {
       url: "/home",
-	  views: {
+	    views: {
 	      'menuContent' :{
 	          controller:  "HomeCtrl",
 	          templateUrl: "templates/home.html"            	
@@ -62,7 +62,8 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
     })
     .state('app.customers', {
       url: "/customers",
-	  views: {
+      cache: false,
+	    views: {
 	      'menuContent' :{
 	          controller:  "CustomerCtrl",
 	          templateUrl: "templates/customers.html"            	

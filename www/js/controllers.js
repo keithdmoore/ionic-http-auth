@@ -48,6 +48,7 @@ angular.module('ionic-http-auth.controllers', [])
  
   $scope.$on('event:auth-logout-complete', function() {
     console.log("logout complete");
+    $state.go('app.home', {}, {reload: true, inherit: false});
   });    	
 })
  
@@ -68,5 +69,7 @@ angular.module('ionic-http-auth.controllers', [])
 })
  
 .controller('LogoutCtrl', function($scope, AuthenticationService) {
-    AuthenticationService.logout();
+    $scope.$on('$ionicView.enter', function() {
+      AuthenticationService.logout();
+    });
 })
