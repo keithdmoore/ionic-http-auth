@@ -9,8 +9,9 @@ http request will be resubmitted with an authorization token on the header. The 
 You can follow the instructions below to build the app properly.  Or if you want, you can just do this:
 
 1. Download the project
-2. Launch python -m SimpleHTTPServer in the www folder of the project. (or just open the index.html with a browser)
-3. Access http://localhost:8000
+2. *npm install*
+2. *ionic serve*
+3. Access http://localhost:8100
 4. Follow the instructions on the "Home" page.
 
 

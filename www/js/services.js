@@ -1,5 +1,5 @@
 angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
-.factory('AuthenticationService', function($rootScope, $http, authService, $httpBackend) {
+.factory('AuthenticationService', function($rootScope, $http, authService, localStorageService) {
   var service = {
     login: function(user) {
       $http.post('https://login', { user: user }, { ignoreAuthModule: true })
@@ -14,6 +14,7 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
         // authorization token placed in the header
         authService.loginConfirmed(data, function(config) {  // Step 2 & 3
           config.headers.Authorization = data.authorizationToken;
+          localStorageService.set('authorizationToken', data.authorizationToken);
           return config;
         });
       })
@@ -24,6 +25,7 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
     logout: function(user) {
       $http.post('https://logout', {}, { ignoreAuthModule: true })
       .finally(function(data) {
+        localStorageService.remove('authorizationToken');
         delete $http.defaults.headers.common.Authorization;
         $rootScope.$broadcast('event:auth-logout-complete');
       });			

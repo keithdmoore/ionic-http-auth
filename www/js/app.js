@@ -6,9 +6,14 @@
 // the 2nd parameter is an array of 'requires'
 // 'ionic-http-auth.controllers' is found in controllers.js
 // 'ionic-http-auth.services is' found in services.js
-angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.services', 'ionic-http-auth.controllers'])
+angular.module('ionic-http-auth', [
+  'ionic',
+  'ngMockE2E',
+  'LocalStorageModule',
+  'ionic-http-auth.services',
+  'ionic-http-auth.controllers'])
 
-.run(function($rootScope, $ionicPlatform, $httpBackend, $http) {
+  .run(function($rootScope, $ionicPlatform, $httpBackend, localStorageService) {
 
 	$ionicPlatform.ready(function() {
     if(window.StatusBar) {
@@ -17,22 +22,21 @@ angular.module('ionic-http-auth', ['ionic', 'ngMockE2E', 'ionic-http-auth.servic
     }
   });
   
-  // Mocking code used for simulation purposes (using ngMockE2E module)	
-  var authorized = false;
+  // Mocking code used for simulation purposes (using ngMockE2E module)
   var customers = [{name: 'John Smith'}, {name: 'Tim Johnson'}];
   
   // returns the current list of customers or a 401 depending on authorization flag
   $httpBackend.whenGET('https://customers').respond(function (method, url, data, headers) {
-	  return authorized ? [200, customers] : [401];
+    var authToken = localStorageService.get('authorizationToken');
+	  return authToken ? [200, customers] : [401];
   });
 
   $httpBackend.whenPOST('https://login').respond(function(method, url, data) {
-    authorized = true;
-    return  [200 , { authorizationToken: "NjMwNjM4OTQtMjE0Mi00ZWYzLWEzMDQtYWYyMjkyMzNiOGIy" } ];
+    var authorizationToken = 'NjMwNjM4OTQtMjE0Mi00ZWYzLWEzMDQtYWYyMjkyMzNiOGIy';
+    return  [200 , { authorizationToken: authorizationToken } ];
   });
 
   $httpBackend.whenPOST('https://logout').respond(function(method, url, data) {
-    authorized = false;
     return [200];
   });
 

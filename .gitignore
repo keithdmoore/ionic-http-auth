@@ -1,1 +1,10 @@
+node_modules/
+platforms/
+plugins/
+www/lib/
+www/css/
+.tmp
+.sass-cache
+*.log
+*.DS_Store
 .idea/

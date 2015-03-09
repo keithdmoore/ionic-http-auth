@@ -29,6 +29,7 @@ angular.module('ionic-http-auth.controllers', [])
   };
 
   $scope.$on('event:auth-loginRequired', function(e, rejection) {
+    console.log('handling login required');
     $scope.loginModal.show();
   });
  
@@ -52,8 +53,7 @@ angular.module('ionic-http-auth.controllers', [])
   });    	
 })
  
-.controller('HomeCtrl', function() {
-
+.controller('HomeCtrl', function($rootScope, $scope, $timeout) {
 })
 
 .controller('CustomerCtrl', function($scope, $state, $http) {
