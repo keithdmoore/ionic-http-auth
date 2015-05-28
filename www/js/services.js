@@ -6,6 +6,7 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
       .success(function (data, status, headers, config) {
 
     	$http.defaults.headers.common.Authorization = data.authorizationToken;  // Step 1
+      localStorageService.set('authorizationToken', data.authorizationToken);
         
     	// Need to inform the http-auth-interceptor that
         // the user has logged in successfully.  To do this, we pass in a function that
@@ -14,7 +15,6 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
         // authorization token placed in the header
         authService.loginConfirmed(data, function(config) {  // Step 2 & 3
           config.headers.Authorization = data.authorizationToken;
-          localStorageService.set('authorizationToken', data.authorizationToken);
           return config;
         });
       })
