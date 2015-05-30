@@ -6,6 +6,7 @@ angular.module('ionic-http-auth.services', ['http-auth-interceptor'])
       .success(function (data, status, headers, config) {
 
     	$http.defaults.headers.common.Authorization = data.authorizationToken;  // Step 1
+    	// A more secure approach would be to store the token in SharedPreferences for Android, and Keychain for iOS
       localStorageService.set('authorizationToken', data.authorizationToken);
         
     	// Need to inform the http-auth-interceptor that
